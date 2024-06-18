@@ -10,6 +10,7 @@ public abstract class Conta implements IConta {
     protected double saldo;
     protected Cliente cliente;
     protected Map<String, String> extrato;
+    protected int contador = 0;
     private LocalDateTime hora = LocalDateTime.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     protected String horaFormatada = hora.format(formatter);
@@ -44,6 +45,7 @@ public abstract class Conta implements IConta {
             System.out.println(valorSacado);
             // this.extrato.add(valorSacado);
             this.extrato.put(horaFormatada, valorSacado);
+            contador++;
         } else {
             throw new RuntimeException("Saldo insuficiente.");
         }
@@ -54,6 +56,7 @@ public abstract class Conta implements IConta {
         String valorDepositado = ("Valor: " + valor + " depositado.");
         this.extrato.put(horaFormatada, valorDepositado);
         System.out.println("Valor: " + valor + " depositado.");
+        contador++;
     }
     @Override
     public void transferir(Conta contaDestino, double valor) {
@@ -62,6 +65,7 @@ public abstract class Conta implements IConta {
             contaDestino.depositar(valor);
             String valorTransferido = ("Valor " + valor + " transferido");
             this.extrato.put(horaFormatada, valorTransferido);
+            contador++;
         } else {
             throw new RuntimeException("Saldo insuficiente.");
         }
@@ -74,5 +78,9 @@ public abstract class Conta implements IConta {
     }   
     public void imprimirExtrato(){
         System.out.println(extrato);
+        System.out.println(contador + " transaçoes realizadas.");
     }
+    public void pagarBoleto(String codigo, double valor){
+
+    };
 }

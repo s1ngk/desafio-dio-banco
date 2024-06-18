@@ -6,12 +6,13 @@ public class Main {
         Conta cc = new ContaCorrente(monique);
         Conta poupanca = new ContaPoupanca(monique);
 
-        cc.depositar(100);
+        cc.depositar(500);
         // cc.transferir(poupanca, 110);
         cc.transferir(poupanca, 100);
 
         cc.consultarSaldo();
         poupanca.consultarSaldo();
+        cc.pagarBoleto("123456789", 100);
 
         cc.imprimirExtrato();
     }
